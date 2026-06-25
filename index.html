@@ -23,7 +23,7 @@
             background-color: #ffffff;
             min-height: 100vh;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow: hidden; /* ★枠外への絶対的なはみ出し防止 */
+            overflow: hidden;
         }
         /* ① バナー画像 */
         .banner img {
@@ -31,23 +31,13 @@
             height: auto;
             display: block;
         }
-        /* プロフィールとLINEボタンのエリア */
+        /* ② プロフィールエリア（アイコン＋タイトル） */
         .profile-section {
             padding: 20px 15px;
-        }
-        .info-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        /* 左側（アイコン＋タイトル）のまとまり */
-        .profile-left {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        /* ② アイコン画像 */
         .profile-icon {
             width: 60px;
             height: 60px;
@@ -62,31 +52,29 @@
             color: #333;
             line-height: 1.4;
         }
-        /* LINEボタンの装飾 */
-        .line-btn {
-            background-color: #06C755;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-            transition: opacity 0.2s;
-            white-space: nowrap;
-            margin-left: 10px;
+        /* ★新規追加：LINEバナー画像のエリア */
+        .line-banner-wrapper {
+            padding: 0 15px 20px; /* 左右の余白は他と合わせ、下に余白をとる */
         }
-        .line-btn:hover {
-            opacity: 0.8;
+        .line-banner-wrapper a {
+            display: block;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .line-banner-wrapper a:hover {
+            opacity: 0.8; /* 押した時に少しフワッと色が変わる */
+        }
+        .line-banner-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px; /* 角を少し丸くしています。不要なら消してOKです */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* 軽く影をつけてボタンっぽくしています */
         }
         /* ③〜⑧ 動画サムネイルのグリッド（3列） */
         .grid-section {
             padding: 0 15px 30px;
             display: grid;
-            /* ★1frではなくminmax(0, 1fr)にして横幅の膨張を強制ストップ */
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 10px;
             width: 100%;
@@ -94,7 +82,7 @@
         .grid-item {
             display: block;
             width: 100%;
-            min-width: 0; /* ★要素が勝手に広がるのを防ぐ */
+            min-width: 0;
             aspect-ratio: 16 / 9;
             text-decoration: none;
         }
@@ -114,33 +102,26 @@
 </head>
 <body>
     <div class="container">
-        <!-- ① バナー -->
         <div class="banner">
             <img src="https://i.ibb.co/BHHq2nWy/2026-06-25-231125.png" alt="バナー">
         </div>
 
-        <!-- タイトル、② アイコン、LINEボタン -->
         <div class="profile-section">
-            <div class="info-flex">
-                <div class="profile-left">
-                    <img src="https://i.ibb.co/tMk89NXj/f5f46631-ffde-4ac7-bdda-880fc5f369de-1.png" alt="プロフィールアイコン" class="profile-icon">
-                    <div class="title">南大阪時短副業<br>せどらー</div>
-                </div>
-                <!-- LINE公式アカウントへのリンク -->
-                <a href="https://lin.ee/yqLpbzZ" class="line-btn">
-                    LINE登録はこちら
-                </a>
-            </div>
+            <img src="https://i.ibb.co/tMk89NXj/f5f46631-ffde-4ac7-bdda-880fc5f369de-1.png" alt="プロフィールアイコン" class="profile-icon">
+            <div class="title">南大阪時短副業<br>せどらー</div>
         </div>
 
-        <!-- 動画サムネイルエリア（3列） -->
+        <div class="line-banner-wrapper">
+            <a href="https://lin.ee/yqLpbzZ" target="_blank">
+                <img src="https://i.ibb.co/ym93Hpmg/LINE.png" alt="LINE登録はこちら">
+            </a>
+        </div>
+
         <div class="grid-section">
-            <!-- ③ YouTubeリンク付き画像 -->
             <a href="https://www.youtube.com/watch?v=JeHf0p6jJ8E&t=70s" target="_blank" class="grid-item">
                 <img src="https://i.ibb.co/mrWBV8JT/image.png" alt="YouTube動画">
             </a>
             
-            <!-- ④〜⑧ 今後画像を追加する用の枠（数字なし） -->
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
