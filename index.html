@@ -58,6 +58,18 @@
             color: #333;
             line-height: 1.4;
         }
+        /* ★新規追加：右側の登録ボタンエリアの縦並び設定 */
+        .profile-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px; /* 文字とボタンの隙間 */
+        }
+        .btn-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #e52d27; /* YouTubeカラーに近い赤色で目立たせています */
+        }
         /* LINEバナー画像のエリア */
         .line-banner-wrapper {
             padding: 0 15px 20px; 
@@ -118,7 +130,10 @@
                 <div class="title">南大阪時短副業<br>せどらー</div>
             </div>
             
-            <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
+            <div class="profile-right">
+                <div class="btn-label">チャンネル登録</div>
+                <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
+            </div>
         </div>
 
         <div class="line-banner-wrapper">
