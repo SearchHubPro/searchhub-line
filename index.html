@@ -55,14 +55,13 @@
             border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
         }
         
-        /* 👇 新規追加：PRO版動画エリアの余白と見出しデザイン */
         .pro-video-section {
             padding: 0 15px 20px;
         }
         .pro-title {
             font-size: 18px;
             font-weight: bold;
-            color: #b8860b; /* 高級感のあるダークゴールド */
+            color: #b8860b; 
             text-align: center;
             margin-bottom: 12px;
         }
@@ -128,6 +127,14 @@
         .dl-btn.sheet { background-color: #0f9d58; }
         .dl-btn.timer { background-color: #2c3e50; }
         .dl-btn.youtube { background-color: #e52d27; padding: 10px 0; font-size: 13px; }
+        
+        /* 準備中ボタン（押せないグレー） */
+        .dl-btn.disabled {
+            background-color: #b0bec5;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .dl-btn.disabled:hover { opacity: 1; }
     </style>
 </head>
 <body>
@@ -189,49 +196,49 @@
             <div class="card">
                 <div class="card-title">📱 Mobile Lite (スマホ版)</div>
                 <div class="card-desc">外出先でのダッシュボード確認や仕入れ登録ができるスマホ専用画面です。ホーム画面に追加してご利用ください。</div>
-                <a href="【スマホ版のURL】" target="_blank" class="dl-btn mobile">スマホに導入する</a>
+                <a href="https://searchhubpro.github.io/searchhub-mobile-lite/" target="_blank" class="dl-btn mobile">スマホに導入する</a>
             </div>
 
             <div class="card">
                 <div class="card-title">🤖 拡張機能</div>
                 <div class="card-desc">ストアから、自動パトロール用の拡張機能をブラウザに追加してください。（※PC専用）</div>
-                <a href="【ウェブストアのURL】" target="_blank" class="dl-btn chrome">Chromeに追加する</a>
-            </div>
+                <div class="dl-btn disabled">準備中</div>
+                </div>
 
             <div class="card">
                 <div class="card-title">📊 専用シート（無料版）</div>
                 <div class="card-desc">ご自身のGoogleドライブにコピーして初期設定を行ってください。</div>
-                <a href="【スプレッドシートのコピー用URL】" target="_blank" class="dl-btn sheet">シートをコピーする</a>
-            </div>
+                <div class="dl-btn disabled">準備中</div>
+                </div>
 
             <div class="card">
                 <div class="card-title">💤 PCスリープタイマー</div>
                 <div class="card-desc">自動パトロール終了後に、PCを自動でスリープ状態にするための便利な補助ツールです。</div>
-                <a href="【スリープタイマーのURL】" target="_blank" class="dl-btn timer">タイマーをダウンロード</a>
-            </div>
+                <div class="dl-btn disabled">準備中</div>
+                </div>
 
             <div class="card">
                 <div class="card-title">📖 設定マニュアル</div>
                 
                 <div class="manual-item">
                     <div class="manual-name">📱 Mobile Lite (スマホ版) 導入方法</div>
-                    <a href="【YouTubeのURL_1】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
-                </div>
+                    <div class="dl-btn disabled">準備中</div>
+                    </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">🤖 拡張機能 導入方法</div>
-                    <a href="【YouTubeのURL_2】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
-                </div>
+                    <div class="dl-btn disabled">準備中</div>
+                    </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">📊 専用シート（無料版） 導入方法</div>
-                    <a href="【YouTubeのURL_3】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
-                </div>
+                    <div class="dl-btn disabled">準備中</div>
+                    </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">💤 PCスリープタイマー 導入方法</div>
-                    <a href="【YouTubeのURL_4】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
-                </div>
+                    <div class="dl-btn disabled">準備中</div>
+                    </div>
             </div>
             
         </div>
