@@ -255,8 +255,9 @@
                     <div class="dl-btn disabled">準備中</div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
                       <div style="display: inline-flex; border: 1px solid #e2e8f0; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 11px; color: #cbd5e0; background: #f8fafc; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);">
-                        <div style="padding: 2px 6px; border-right: 1px solid #e2e8f0;" title="サイト訪問数">028,451</div>
-                        <div style="padding: 2px 6px;" title="総ダウンロード数">014,902</div>
+                        <!-- 👇 ダミー数字を消して、idを追加！ 初期表示は「---,---」 -->
+                        <div style="padding: 2px 6px; border-right: 1px solid #e2e8f0;" title="サイト訪問数" id="count-visit">---,---</div>
+                        <div style="padding: 2px 6px;" title="総ダウンロード数" id="count-dl">---,---</div>
                       </div>
                     </div>
                     </div>
@@ -265,5 +266,53 @@
         </div>
 
     </div>
+
+    <!-- 👇 ここから自動集計システム（GASと通信する魔法） 👇 -->
+    <script>
+        // ★★★絶対にここを書き換える！★★★
+        // さっきGASで発行した「ウェブアプリのURL」を下のダブルクォーテーションの間に貼り付けてな！
+        const COUNTER_GAS_URL = "https://script.google.com/macros/library/d/1__vAtu3Yo0NbWkujDs6DYK68iV9Qwbal1sD2yNtdQKuf4Pdse-5u9CdW/1";
+
+        // ① ページが開かれた瞬間に「訪問数」を+1する
+        window.addEventListener('DOMContentLoaded', () => {
+            if(COUNTER_GAS_URL.includes("【")) return; // URL設定前はエラー防ぐためにストップ
+            
+            fetch(COUNTER_GAS_URL + "?action=visit")
+                .then(response => response.json())
+                .then(data => updateCounterUI(data.visits, data.downloads))
+                .catch(e => console.log("Counter Error", e));
+        });
+
+        // ② ボタンが押されたら「DL数」を+1する
+        function recordDownload() {
+            if(COUNTER_GAS_URL.includes("【")) return;
+            
+            fetch(COUNTER_GAS_URL + "?action=download")
+                .then(response => response.json())
+                .then(data => updateCounterUI(data.visits, data.downloads))
+                .catch(e => console.log("Counter Error", e));
+        }
+
+        // 画面の数字をカッコよく（000,123 の形に）更新する処理
+        function updateCounterUI(v, d) {
+            if(document.getElementById('count-visit')) {
+                document.getElementById('count-visit').innerText = String(v).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            if(document.getElementById('count-dl')) {
+                document.getElementById('count-dl').innerText = String(d).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        }
+
+        // ③ 「DLっぽいボタン（準備中以外）」が押されたら全部自動でカウントする
+        window.addEventListener('DOMContentLoaded', () => {
+            // "準備中" じゃないボタンを全部見つけて監視する
+            const dlButtons = document.querySelectorAll('.dl-btn:not(.disabled)');
+            dlButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    recordDownload();
+                });
+            });
+        });
+    </script>
 </body>
 </html>
