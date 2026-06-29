@@ -143,6 +143,13 @@
             box-shadow: none;
         }
         .dl-btn.disabled:hover { opacity: 1; }
+
+        /* Q&A用の追加スタイル */
+        .qa-item { margin-bottom: 15px; }
+        .qa-item:last-child { margin-bottom: 0; }
+        .qa-q { font-weight: bold; color: #1a365d; font-size: 14px; margin-bottom: 5px; }
+        .qa-a { font-size: 13px; color: #4a5568; line-height: 1.6; padding-left: 10px; border-left: 3px solid #1a73e8; }
+        .qa-a span { font-weight: bold; color: #1a73e8; margin-right: 4px; }
     </style>
 </head>
 <body>
@@ -248,7 +255,7 @@
                 
                 <div class="manual-item">
                     <div class="manual-name">📊 専用シート（無料版） 導入方法</div>
-                    <div class="dl-btn disabled">準備中</div>
+                    <a href="https://youtu.be/j4pmPJoiazg" target="_blank" class="dl-btn youtube">動画を見る</a>
                 </div>
                 
                 <div class="manual-item">
@@ -265,6 +272,35 @@
                         <div style="padding: 2px 6px;" title="総ダウンロード数" id="count-dl">---,---</div>
                       </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <div class="section-title" style="font-size: 18px; margin-bottom: 15px; text-align: left;">🙋‍♂️ よくあるご質問 (Q&A)</div>
+                
+                <div class="qa-item">
+                    <div class="qa-q">❓ Q1. 本当に無料で使えるの？</div>
+                    <div class="qa-a"><span>A.</span>はい、無料版（Lite）は一切費用かかりません！初期設定さえすれば、ずっと無料でリサーチやパトロール機能をお試しいただけます。</div>
+                </div>
+                
+                <div class="qa-item">
+                    <div class="qa-q">❓ Q2. スマホだけで完結する？</div>
+                    <div class="qa-a"><span>A.</span>当システムは「スマホ用Webアプリ」と「パソコン用スプレッドシート」を連動させて使うハイブリッド仕様です。そのため、設定や自動パトロールにはパソコン（Googleアカウント）が必要です。外出先での確認や仕入れ登録はスマホから爆速で行えます！</div>
+                </div>
+                
+                <div class="qa-item">
+                    <div class="qa-q">❓ Q3. Keepaの契約は絶対に必要？</div>
+                    <div class="qa-a"><span>A.</span>はい、Amazonのデータを正確に解析・パトロールするため、有料版のKeepa契約（APIが使える状態）が別途必要になります。</div>
+                </div>
+                
+                <div class="qa-item">
+                    <div class="qa-q">❓ Q4. 無料版（Lite）とPRO版の違いは何？</div>
+                    <div class="qa-a"><span>A.</span>無料版は機能制限（仕入先やURLの登録ロック、一部画面のPRO版ロックなど）がありますが、WatcherパトロールやManagerへの仕入れ登録など基本機能はバッチリ使えます。PRO版にアップグレードすると、全ロックが解除されて売上・利益のリアルタイム自動集計なども完全解放されます！</div>
+                </div>
+                
+                <div class="qa-item">
+                    <div class="qa-q">❓ Q5. PCスリープタイマーって何に使うの？</div>
+                    <div class="qa-a"><span>A.</span>パソコンでの自動パトロールが終わった後に、自動でPCをスリープ状態にして電気代を節約するための便利な補助ツールです。夜間にパトロールを回しっぱなしにする時に大活躍します！</div>
                 </div>
             </div>
             
