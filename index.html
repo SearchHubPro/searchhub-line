@@ -56,7 +56,7 @@
         }
         
         .pro-video-section {
-            padding: 0 15px 30px; /* 少し余白を広げたで */
+            padding: 0 15px 30px;
         }
         .pro-title {
             font-size: 18px;
@@ -66,7 +66,6 @@
             margin-bottom: 12px;
         }
 
-        /* 👇 新規追加：YouTube動画一覧のタイトルデザイン */
         .youtube-title {
             font-size: 16px;
             font-weight: bold;
@@ -136,11 +135,8 @@
         .dl-btn.sheet { background-color: #0f9d58; }
         .dl-btn.timer { background-color: #2c3e50; }
         .dl-btn.youtube { background-color: #e52d27; padding: 10px 0; font-size: 13px; }
-        
-        /* 👇 🌟 新規追加：PRO版用ゴールドボタン */
         .dl-btn.pro { background-color: #b8860b; }
 
-        /* 準備中ボタン（押せないグレー） */
         .dl-btn.disabled {
             background-color: #b0bec5;
             cursor: not-allowed;
@@ -218,19 +214,19 @@
                 <div class="card-title">🤖 拡張機能</div>
                 <div class="card-desc">ストアから、自動パトロール用の拡張機能をブラウザに追加してください。（※PC専用）</div>
                 <div class="dl-btn disabled">準備中</div>
-                </div>
+            </div>
 
             <div class="card">
                 <div class="card-title">📊 専用シート（無料版）</div>
                 <div class="card-desc">ご自身のGoogleドライブにコピーして初期設定を行ってください。</div>
-                <div class="dl-btn disabled">準備中</div>
-                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1EZWqQu6gfBKDwQJxpf5uZpN24oah7Zqm3eu0zKNpsec/copy" target="_blank" class="dl-btn sheet">シートをコピーする</a>
+            </div>
 
             <div class="card">
                 <div class="card-title">💤 PCスリープタイマー</div>
                 <div class="card-desc">自動パトロール終了後に、PCを自動でスリープ状態にするための便利な補助ツールです。</div>
-                <div class="dl-btn disabled">準備中</div>
-                </div>
+                <a href="https://drive.google.com/file/d/14FYdbyWOqiuzltOU2rG7a05EQCBaVQy1/view?usp=sharing" target="_blank" class="dl-btn timer">ZIPをダウンロードする</a>
+            </div>
 
             <div class="card">
                 <div class="card-title">📖 設定マニュアル</div>
@@ -238,44 +234,39 @@
                 <div class="manual-item">
                     <div class="manual-name">📱 Mobile Lite (スマホ版) 導入方法</div>
                     <div class="dl-btn disabled">準備中</div>
-                    </div>
+                </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">🤖 拡張機能 導入方法</div>
                     <div class="dl-btn disabled">準備中</div>
-                    </div>
+                </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">📊 専用シート（無料版） 導入方法</div>
                     <div class="dl-btn disabled">準備中</div>
-                    </div>
+                </div>
                 
                 <div class="manual-item">
                     <div class="manual-name">💤 PCスリープタイマー 導入方法</div>
                     <div class="dl-btn disabled">準備中</div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
                       <div style="display: inline-flex; border: 1px solid #e2e8f0; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 11px; color: #cbd5e0; background: #f8fafc; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);">
-                        <!-- 👇 ダミー数字を消して、idを追加！ 初期表示は「---,---」 -->
                         <div style="padding: 2px 6px; border-right: 1px solid #e2e8f0;" title="サイト訪問数" id="count-visit">---,---</div>
                         <div style="padding: 2px 6px;" title="総ダウンロード数" id="count-dl">---,---</div>
                       </div>
                     </div>
-                    </div>
+                </div>
             </div>
             
         </div>
 
     </div>
 
-    <!-- 👇 ここから自動集計システム（GASと通信する魔法） 👇 -->
     <script>
-        // ★★★絶対にここを書き換える！★★★
-        // さっきGASで発行した「ウェブアプリのURL」を下のダブルクォーテーションの間に貼り付けてな！
         const COUNTER_GAS_URL = "https://script.google.com/macros/s/AKfycbzqAlLUYIiBL3xCmB6iBArALrLxnP6yvtrEHEdpA5L0Up-6pNxKDIE-ZkXf5Mo4sktkdA/exec";
 
-        // ① ページが開かれた瞬間に「訪問数」を+1する
         window.addEventListener('DOMContentLoaded', () => {
-            if(COUNTER_GAS_URL.includes("【")) return; // URL設定前はエラー防ぐためにストップ
+            if(COUNTER_GAS_URL.includes("【")) return;
             
             fetch(COUNTER_GAS_URL + "?action=visit")
                 .then(response => response.json())
@@ -283,7 +274,6 @@
                 .catch(e => console.log("Counter Error", e));
         });
 
-        // ② ボタンが押されたら「DL数」を+1する
         function recordDownload() {
             if(COUNTER_GAS_URL.includes("【")) return;
             
@@ -293,7 +283,6 @@
                 .catch(e => console.log("Counter Error", e));
         }
 
-        // 画面の数字をカッコよく（000,123 の形に）更新する処理
         function updateCounterUI(v, d) {
             if(document.getElementById('count-visit')) {
                 document.getElementById('count-visit').innerText = String(v).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -303,9 +292,7 @@
             }
         }
 
-        // ③ 「DLっぽいボタン（準備中以外）」が押されたら全部自動でカウントする
         window.addEventListener('DOMContentLoaded', () => {
-            // "準備中" じゃないボタンを全部見つけて監視する
             const dlButtons = document.querySelectorAll('.dl-btn:not(.disabled)');
             dlButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
