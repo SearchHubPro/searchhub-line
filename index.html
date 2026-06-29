@@ -292,13 +292,14 @@
             }
         }
 
+        // ③ 「Mobile Lite（スマホ版）」のボタンが押された時だけカウントする
         window.addEventListener('DOMContentLoaded', () => {
-            const dlButtons = document.querySelectorAll('.dl-btn:not(.disabled)');
-            dlButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
+            const mobileBtn = document.querySelector('.dl-btn.mobile');
+            if(mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
                     recordDownload();
                 });
-            });
+            }
         });
     </script>
 </body>
