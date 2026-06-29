@@ -15,17 +15,12 @@
             padding: 0;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             background-color: #f5f5f5;
-            scroll-behavior: smooth; /* 🌟ボタンを押した時にスーッと移動させる魔法 */
+            scroll-behavior: smooth;
         }
-        /* スマホ向けの中央配置コンテナ */
         .container {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            min-height: 100vh;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow: hidden;
+            width: 100%; max-width: 500px; margin: 0 auto;
+            background-color: #ffffff; min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); overflow: hidden;
         }
         .banner img { width: 100%; height: auto; display: block; }
         
@@ -60,6 +55,18 @@
             border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
         }
         
+        /* 👇 新規追加：PRO版動画エリアの余白と見出しデザイン */
+        .pro-video-section {
+            padding: 0 15px 20px;
+        }
+        .pro-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b8860b; /* 高級感のあるダークゴールド */
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
         .grid-section {
             padding: 0 15px 30px; display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%;
@@ -71,31 +78,56 @@
         }
         .placeholder { background-color: #e0e0e0; border-radius: 8px; }
 
-        /* 👇 新設：ページ一番下のダウンロードエリアのデザイン */
         .download-section {
-            padding: 30px 15px 40px;
-            background-color: #f9f9f9;
-            border-top: 1px solid #eee;
+            padding: 30px 15px 40px; background-color: #f9f9f9; border-top: 1px solid #eee;
         }
         .section-title {
-            font-size: 18px; font-weight: bold; color: #1a73e8;
+            font-size: 20px; font-weight: bold; color: #1a73e8;
             text-align: center; margin-bottom: 20px; line-height: 1.4;
         }
+
+        .video-wrapper {
+            position: relative; width: 100%; padding-top: 56.25%;
+            margin-bottom: 25px; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        }
+
         .card {
             border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;
             margin-bottom: 15px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         .card-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; }
         .card-desc { font-size: 12px; color: #666; margin-bottom: 15px; line-height: 1.5; }
+        
+        .manual-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .manual-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .manual-name {
+            font-size: 13px; font-weight: bold; color: #333; margin-bottom: 10px;
+        }
+
         .dl-btn {
             display: block; width: 100%; text-align: center; color: #fff;
             text-decoration: none; padding: 12px 0; border-radius: 6px;
             font-size: 14px; font-weight: bold; transition: opacity 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .dl-btn:hover { opacity: 0.8; }
+        
+        .dl-btn.mobile { background-color: #8e44ad; }
         .dl-btn.chrome { background-color: #1a73e8; }
         .dl-btn.sheet { background-color: #0f9d58; }
-        .dl-btn.manual { background-color: #ff9900; }
+        .dl-btn.timer { background-color: #2c3e50; }
+        .dl-btn.youtube { background-color: #e52d27; padding: 10px 0; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -128,6 +160,13 @@
             </a>
         </div>
 
+        <div class="pro-video-section">
+            <div class="pro-title">👑 SearchHub PRO版のご紹介</div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/JeHf0p6jJ8E" title="SearchHub PRO版のご紹介" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
         <div class="grid-section">
             <a href="https://www.youtube.com/watch?v=JeHf0p6jJ8E&t=70s" target="_blank" class="grid-item">
                 <img src="https://i.ibb.co/mrWBV8JT/image.png" alt="YouTube動画">
@@ -140,7 +179,18 @@
         </div>
 
         <div id="download-area" class="download-section">
-            <div class="section-title">📥 SearchHub Lite<br>ダウンロードセンター</div>
+            
+            <div class="section-title">🎥 SearchHub Mobile Lite 紹介</div>
+
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/JeHf0p6jJ8E" title="SearchHub Mobile Liteで出来ること" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📱 Mobile Lite (スマホ版)</div>
+                <div class="card-desc">外出先でのダッシュボード確認や仕入れ登録ができるスマホ専用画面です。ホーム画面に追加してご利用ください。</div>
+                <a href="【スマホ版のURL】" target="_blank" class="dl-btn mobile">スマホに導入する</a>
+            </div>
 
             <div class="card">
                 <div class="card-title">🤖 拡張機能</div>
@@ -155,10 +205,35 @@
             </div>
 
             <div class="card">
-                <div class="card-title">📖 設定マニュアル</div>
-                <div class="card-desc">APIキーの取得やシステム連携手順を動画で解説しています。</div>
-                <a href="【マニュアルのURL】" target="_blank" class="dl-btn manual">マニュアルを見る</a>
+                <div class="card-title">💤 PCスリープタイマー</div>
+                <div class="card-desc">自動パトロール終了後に、PCを自動でスリープ状態にするための便利な補助ツールです。</div>
+                <a href="【スリープタイマーのURL】" target="_blank" class="dl-btn timer">タイマーをダウンロード</a>
             </div>
+
+            <div class="card">
+                <div class="card-title">📖 設定マニュアル</div>
+                
+                <div class="manual-item">
+                    <div class="manual-name">📱 Mobile Lite (スマホ版) 導入方法</div>
+                    <a href="【YouTubeのURL_1】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
+                </div>
+                
+                <div class="manual-item">
+                    <div class="manual-name">🤖 拡張機能 導入方法</div>
+                    <a href="【YouTubeのURL_2】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
+                </div>
+                
+                <div class="manual-item">
+                    <div class="manual-name">📊 専用シート（無料版） 導入方法</div>
+                    <a href="【YouTubeのURL_3】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
+                </div>
+                
+                <div class="manual-item">
+                    <div class="manual-name">💤 PCスリープタイマー 導入方法</div>
+                    <a href="【YouTubeのURL_4】" target="_blank" class="dl-btn youtube">YouTubeで見る</a>
+                </div>
+            </div>
+            
         </div>
 
     </div>
