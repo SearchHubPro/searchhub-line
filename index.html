@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>南大阪時短副業せどらー</title>
+    <title>南大阪の人</title>
     <script src="https://apis.google.com/js/platform.js"></script>
     <style>
         /* ページ全体の基本設定 */
@@ -32,12 +32,12 @@
             height: auto;
             display: block;
         }
-        /* ② プロフィールエリア（アイコン＋タイトル＋登録ボタン） */
+        /* ② プロフィールエリア（アイコン＋タイトル＋登録ボタン類） */
         .profile-section {
             padding: 20px 15px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between; 
         }
         .profile-left {
             display: flex;
@@ -58,8 +58,14 @@
             color: #333;
             line-height: 1.4;
         }
-        /* 右側の登録ボタンエリアの縦並び設定 */
+        /* ★変更：右側のボタンエリアを横並び（LINEとYouTube）にする */
         .profile-right {
+            display: flex;
+            flex-direction: row; /* 横並びに変更 */
+            align-items: center;
+            gap: 12px; /* LINEとYouTubeの隙間 */
+        }
+        .action-block {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -68,21 +74,44 @@
         .btn-label {
             font-size: 11px;
             font-weight: bold;
-            color: #e52d27;
+            color: #e52d27; /* YouTubeカラー */
         }
-        /* LINEバナー画像のエリア */
-        .line-banner-wrapper {
+        .btn-label.line-color {
+            color: #06C755; /* LINEカラー */
+        }
+        /* 新設したLINEボタンのデザイン */
+        .line-btn {
+            background-color: #06C755;
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 0 10px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px; /* YouTubeボタンの高さに合わせる */
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            transition: opacity 0.2s;
+        }
+        .line-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* センターバナー画像のエリア */
+        .main-banner-wrapper {
             padding: 0 15px 20px; 
         }
-        .line-banner-wrapper a {
+        .main-banner-wrapper a {
             display: block;
             text-decoration: none;
             transition: opacity 0.2s;
         }
-        .line-banner-wrapper a:hover {
+        .main-banner-wrapper a:hover {
             opacity: 0.8; 
         }
-        .line-banner-wrapper img {
+        .main-banner-wrapper img {
             width: 100%;
             height: auto;
             display: block;
@@ -111,7 +140,6 @@
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        /* まだ画像がない場所の仮デザイン */
         .placeholder {
             background-color: #e0e0e0;
             border-radius: 8px;
@@ -127,19 +155,25 @@
         <div class="profile-section">
             <div class="profile-left">
                 <img src="https://i.ibb.co/tMk89NXj/f5f46631-ffde-4ac7-bdda-880fc5f369de-1.png" alt="プロフィールアイコン" class="profile-icon">
-                <div class="title">南大阪時短副業<br>せどらー</div>
+                <div class="title">南大阪の人</div>
             </div>
             
             <div class="profile-right">
-                <div class="btn-label">チャンネル登録</div>
-                <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
+                <div class="action-block">
+                    <div class="btn-label line-color">LINE登録</div>
+                    <a href="https://lin.ee/yqLpbzZ" target="_blank" class="line-btn">友だち追加</a>
+                </div>
+                
+                <div class="action-block">
+                    <div class="btn-label">チャンネル登録</div>
+                    <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
+                </div>
             </div>
         </div>
 
-        <div class="line-banner-wrapper">
-            <a href="https://lin.ee/yqLpbzZ" target="_blank">
-                <!-- ここをさらに新しい「もっとシンプル」な画像URLに差し替えました -->
-                <img src="https://i.ibb.co/99qP47tr/LINE.png" alt="LINE登録はこちら">
+        <div class="main-banner-wrapper">
+            <a href="【ここにダウンロードページのURLを入れる】" target="_blank">
+                <img src="https://i.ibb.co/qFmjqn0M/LINE.png" alt="各種ダウンロードはこちら">
             </a>
         </div>
 
