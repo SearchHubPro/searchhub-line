@@ -15,6 +15,7 @@
             padding: 0;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             background-color: #f5f5f5;
+            scroll-behavior: smooth; /* 🌟ボタンを押した時にスーッと移動させる魔法 */
         }
         /* スマホ向けの中央配置コンテナ */
         .container {
@@ -26,124 +27,75 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        /* ① バナー画像 */
-        .banner img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        /* ② プロフィールエリア（アイコン＋タイトル＋登録ボタン類） */
+        .banner img { width: 100%; height: auto; display: block; }
+        
         .profile-section {
-            padding: 20px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between; 
+            padding: 20px 15px; display: flex;
+            align-items: center; justify-content: space-between; 
         }
-        .profile-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .profile-left { display: flex; align-items: center; gap: 12px; }
         .profile-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #eee;
-            flex-shrink: 0;
+            width: 60px; height: 60px; border-radius: 50%;
+            object-fit: cover; border: 2px solid #eee; flex-shrink: 0;
         }
-        .title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #333;
-            line-height: 1.4;
-        }
-        /* ★変更：右側のボタンエリアを横並び（LINEとYouTube）にする */
-        .profile-right {
-            display: flex;
-            flex-direction: row; /* 横並びに変更 */
-            align-items: center;
-            gap: 12px; /* LINEとYouTubeの隙間 */
-        }
-        .action-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .btn-label {
-            font-size: 11px;
-            font-weight: bold;
-            color: #e52d27; /* YouTubeカラー */
-        }
-        .btn-label.line-color {
-            color: #06C755; /* LINEカラー */
-        }
-        /* 新設したLINEボタンのデザイン */
+        .title { font-size: 15px; font-weight: bold; color: #333; line-height: 1.4; }
+        
+        .profile-right { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+        .action-block { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .btn-label { font-size: 11px; font-weight: bold; color: #e52d27; }
+        .btn-label.line-color { color: #06C755; }
         .line-btn {
-            background-color: #06C755;
-            color: #fff;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 0 10px;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 24px; /* YouTubeボタンの高さに合わせる */
-            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            transition: opacity 0.2s;
+            background-color: #06C755; color: #fff; text-decoration: none;
+            font-size: 11px; font-weight: bold; padding: 0 10px; border-radius: 2px;
+            display: flex; align-items: center; justify-content: center;
+            height: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: opacity 0.2s;
         }
-        .line-btn:hover {
-            opacity: 0.8;
-        }
+        .line-btn:hover { opacity: 0.8; }
 
-        /* センターバナー画像のエリア */
-        .main-banner-wrapper {
-            padding: 0 15px 20px; 
-        }
-        .main-banner-wrapper a {
-            display: block;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .main-banner-wrapper a:hover {
-            opacity: 0.8; 
-        }
+        .main-banner-wrapper { padding: 0 15px 20px; }
+        .main-banner-wrapper a { display: block; text-decoration: none; transition: opacity 0.2s; }
+        .main-banner-wrapper a:hover { opacity: 0.8; }
         .main-banner-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px; 
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+            width: 100%; height: auto; display: block;
+            border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
         }
-        /* 動画サムネイルのグリッド（3列） */
+        
         .grid-section {
-            padding: 0 15px 30px;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            width: 100%;
+            padding: 0 15px 30px; display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%;
         }
-        .grid-item {
-            display: block;
-            width: 100%;
-            min-width: 0;
-            aspect-ratio: 16 / 9;
-            text-decoration: none;
-        }
+        .grid-item { display: block; width: 100%; min-width: 0; aspect-ratio: 16 / 9; text-decoration: none; }
         .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .placeholder {
-            background-color: #e0e0e0;
-            border-radius: 8px;
+        .placeholder { background-color: #e0e0e0; border-radius: 8px; }
+
+        /* 👇 新設：ページ一番下のダウンロードエリアのデザイン */
+        .download-section {
+            padding: 30px 15px 40px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
         }
+        .section-title {
+            font-size: 18px; font-weight: bold; color: #1a73e8;
+            text-align: center; margin-bottom: 20px; line-height: 1.4;
+        }
+        .card {
+            border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;
+            margin-bottom: 15px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .card-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; }
+        .card-desc { font-size: 12px; color: #666; margin-bottom: 15px; line-height: 1.5; }
+        .dl-btn {
+            display: block; width: 100%; text-align: center; color: #fff;
+            text-decoration: none; padding: 12px 0; border-radius: 6px;
+            font-size: 14px; font-weight: bold; transition: opacity 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dl-btn:hover { opacity: 0.8; }
+        .dl-btn.chrome { background-color: #1a73e8; }
+        .dl-btn.sheet { background-color: #0f9d58; }
+        .dl-btn.manual { background-color: #ff9900; }
     </style>
 </head>
 <body>
@@ -163,7 +115,6 @@
                     <div class="btn-label line-color">LINE登録</div>
                     <a href="https://lin.ee/yqLpbzZ" target="_blank" class="line-btn">友だち追加</a>
                 </div>
-                
                 <div class="action-block">
                     <div class="btn-label">チャンネル登録</div>
                     <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
@@ -172,7 +123,7 @@
         </div>
 
         <div class="main-banner-wrapper">
-            <a href="【ここにダウンロードページのURLを入れる】" target="_blank">
+            <a href="#download-area">
                 <img src="https://i.ibb.co/qFmjqn0M/LINE.png" alt="各種ダウンロードはこちら">
             </a>
         </div>
@@ -181,13 +132,35 @@
             <a href="https://www.youtube.com/watch?v=JeHf0p6jJ8E&t=70s" target="_blank" class="grid-item">
                 <img src="https://i.ibb.co/mrWBV8JT/image.png" alt="YouTube動画">
             </a>
-            
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
             <div class="grid-item placeholder"></div>
         </div>
+
+        <div id="download-area" class="download-section">
+            <div class="section-title">📥 SearchHub Lite<br>ダウンロードセンター</div>
+
+            <div class="card">
+                <div class="card-title">🤖 拡張機能</div>
+                <div class="card-desc">ストアから、自動パトロール用の拡張機能をブラウザに追加してください。（※PC専用）</div>
+                <a href="【ウェブストアのURL】" target="_blank" class="dl-btn chrome">Chromeに追加する</a>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 専用シート（無料版）</div>
+                <div class="card-desc">ご自身のGoogleドライブにコピーして初期設定を行ってください。</div>
+                <a href="【スプレッドシートのコピー用URL】" target="_blank" class="dl-btn sheet">シートをコピーする</a>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📖 設定マニュアル</div>
+                <div class="card-desc">APIキーの取得やシステム連携手順を動画で解説しています。</div>
+                <a href="【マニュアルのURL】" target="_blank" class="dl-btn manual">マニュアルを見る</a>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
