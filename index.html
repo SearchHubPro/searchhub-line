@@ -5,36 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>南大阪の人</title>
     <script src="https://apis.google.com/js/platform.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ページ全体の基本設定 */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        /* 基本設定 */
+        *, *::before, *::after { box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             scroll-behavior: smooth;
         }
         .container {
             width: 100%; max-width: 500px; margin: 0 auto;
             background-color: #ffffff; min-height: 100vh;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden;
+            position: relative;
         }
         .banner img { width: 100%; height: auto; display: block; }
         
-        .profile-section {
-            padding: 20px 15px; display: flex;
-            align-items: center; justify-content: space-between; 
-        }
+        .profile-section { padding: 20px 15px; display: flex; align-items: center; justify-content: space-between; }
         .profile-left { display: flex; align-items: center; gap: 12px; }
         .profile-icon {
             width: 60px; height: 60px; border-radius: 50%;
             object-fit: cover; border: 2px solid #eee; flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .title { font-size: 15px; font-weight: bold; color: #333; line-height: 1.4; }
+        .title { font-size: 16px; font-weight: 900; color: #1a365d; }
         
+        /* カウンター用追加 */
+        .counter-box { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 10px; color: #a0aec0; background: #f8fafc; margin-top:4px;}
+        .counter-box div { padding: 2px 6px; }
+        .counter-box div:first-child { border-right: 1px solid #e2e8f0; }
+
         .profile-right { display: flex; flex-direction: row; align-items: center; gap: 12px; }
         .action-block { display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .btn-label { font-size: 11px; font-weight: bold; color: #e52d27; }
@@ -46,124 +48,139 @@
             height: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: opacity 0.2s;
         }
         .line-btn:hover { opacity: 0.8; }
-
+        
+        /* メインバナー */
         .main-banner-wrapper { padding: 0 15px 20px; }
-        .main-banner-wrapper a { display: block; text-decoration: none; transition: opacity 0.2s; }
-        .main-banner-wrapper a:hover { opacity: 0.8; }
+        .main-banner-wrapper a { display: block; text-decoration: none; transition: transform 0.2s; }
+        .main-banner-wrapper a:hover { transform: scale(1.02); }
         .main-banner-wrapper img {
             width: 100%; height: auto; display: block;
-            border-radius: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
         }
         
-        .pro-video-section {
-            padding: 0 15px 30px;
-        }
-        .pro-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #b8860b; 
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .youtube-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .grid-section {
-            padding: 0 15px 30px; display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%;
-        }
-        .grid-item { display: block; width: 100%; min-width: 0; aspect-ratio: 16 / 9; text-decoration: none; }
-        .grid-item img {
-            width: 100%; height: 100%; object-fit: cover;
-            border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .placeholder { background-color: #e0e0e0; border-radius: 8px; }
-
-        .download-section {
-            padding: 30px 15px 40px; background-color: #f9f9f9; border-top: 1px solid #eee;
-        }
-        .section-title {
-            font-size: 20px; font-weight: bold; color: #1a73e8;
-            text-align: center; margin-bottom: 20px; line-height: 1.4;
-        }
-
+        /* PROセクション */
+        .pro-video-section { padding: 0 15px 30px; }
+        .pro-title { font-size: 18px; font-weight: 900; color: #b8860b; text-align: center; margin-bottom: 12px; display:flex; justify-content:center; align-items:center; gap:6px;}
         .video-wrapper {
             position: relative; width: 100%; padding-top: 56.25%;
-            margin-bottom: 25px; border-radius: 8px; overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1); background-color: #000;
+            margin-bottom: 25px; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15); background-color: #000;
         }
-        .video-wrapper iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-        }
-
-        .card {
-            border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px;
-            margin-bottom: 15px; background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .card-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; }
-        .card-desc { font-size: 12px; color: #666; margin-bottom: 15px; line-height: 1.5; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
         
-        .manual-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #e0e0e0;
+        /* 3Dボタン仕様 */
+        .btn-3d {
+            display: flex; align-items: center; justify-content: center; gap:8px;
+            width: 100%; text-align: center; color: #fff; text-decoration: none;
+            padding: 14px 0; border-radius: 8px; font-size: 15px; font-weight: bold;
+            transition: all 0.1s; position: relative; top: 0;
         }
-        .manual-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        .manual-name {
-            font-size: 13px; font-weight: bold; color: #333; margin-bottom: 10px;
-        }
-
-        .dl-btn {
-            display: block; width: 100%; text-align: center; color: #fff;
-            text-decoration: none; padding: 12px 0; border-radius: 6px;
-            font-size: 14px; font-weight: bold; transition: opacity 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .dl-btn:hover { opacity: 0.8; }
+        .btn-3d:active { top: 4px; box-shadow: 0 0 0 transparent !important; }
+        .btn-pro { background-color: #b8860b; box-shadow: 0 4px 0 #8a6408; margin-bottom: 30px;}
         
-        .dl-btn.mobile { background-color: #8e44ad; }
-        .dl-btn.chrome { background-color: #1a73e8; }
-        .dl-btn.sheet { background-color: #0f9d58; }
-        .dl-btn.timer { background-color: #2c3e50; }
-        .dl-btn.youtube { background-color: #e52d27; padding: 10px 0; font-size: 13px; }
-        .dl-btn.pro { background-color: #b8860b; }
+        /* YouTubeグリッド */
+        .youtube-title { font-size: 16px; font-weight: 900; color: #333; text-align: center; margin-bottom: 15px; }
+        .grid-section { padding: 0 15px 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .grid-item { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s;}
+        .grid-item:hover { transform: scale(1.05); }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; }
+        .placeholder { background-color: #e2e8f0; }
 
-        .dl-btn.disabled {
-            background-color: #b0bec5;
-            cursor: not-allowed;
-            box-shadow: none;
+        /* ==========================================
+           👇 セールスレター用のCSS 👇
+           ========================================== */
+        .sales-container { padding: 0 15px 40px 15px; background: #fff; border-top: 1px solid #f1f5f9; padding-top: 30px;}
+        
+        .sales-heading { font-size: 20px; font-weight: 900; color: #1a365d; text-align: center; margin: 0 0 24px 0; line-height: 1.4;}
+        .sales-subheading { font-size: 18px; font-weight: 900; color: #1a365d; margin: 40px 0 16px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;}
+        
+        .marker { background: linear-gradient(transparent 60%, #fef08a 60%); font-weight: bold; }
+        
+        .pain-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .pain-item { background: #fff5f5; border-left: 5px solid #e53e3e; padding: 14px; border-radius: 6px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
+        .pain-item i { font-size: 20px; color: #e53e3e; width: 24px; text-align: center;}
+        .pain-text { font-size: 13px; font-weight: bold; color: #2d3748; line-height: 1.5; }
+        
+        .solution-box { background: #ebf8ff; border: 2px solid #3182ce; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 40px; position: relative;}
+        .solution-box::before { content: "▼"; position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 20px; color: #3182ce; }
+        .solution-title { font-size: 15px; font-weight: 900; color: #2b6cb0; margin-bottom: 10px; }
+        .solution-desc { font-size: 13px; font-weight: bold; color: #2d3748; line-height: 1.6; }
+        
+        .sales-text { font-size: 14px; line-height: 1.8; color: #4a5568; margin-bottom: 20px; }
+        
+        .feature-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .feature-badge { background: #b8860b; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .feature-title { font-size: 15px; font-weight: 900; color: #1a365d; margin-bottom: 12px; line-height: 1.4; }
+        .feature-desc { font-size: 13px; color: #4a5568; line-height: 1.6; margin-bottom: 16px; }
+        .feature-list { padding-left: 20px; font-size: 13px; color: #4a5568; line-height: 1.6; margin-bottom: 16px; }
+        .feature-list li { margin-bottom: 6px; }
+        
+        .feature-img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #e2e8f0; }
+
+        .mobile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
+        .feature-img-mobile { width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 3px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: block; margin: 0; }
+        
+        .check-list { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 30px;}
+        .check-item { display: flex; gap: 10px; margin-bottom: 12px; font-size: 13px; color: #4a5568; line-height: 1.6; border-bottom: 1px dashed #cbd5e0; padding-bottom: 12px;}
+        .check-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+        .check-item i { color: #d69e2e; font-size: 16px; margin-top: 2px; }
+        
+        .warning-box { background: #fffff0; border: 2px solid #d69e2e; border-radius: 8px; padding: 20px; margin-bottom: 40px; }
+        .warning-title { font-size: 16px; font-weight: 900; color: #b7791f; margin-bottom: 12px; display:flex; align-items:center; gap:6px;}
+        .warning-desc { font-size: 13px; color: #744210; line-height: 1.6; font-weight:bold;}
+
+        /* アコーディオン（開閉式Q&A） */
+        .qa-container { background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; margin: 20px 0 40px;}
+        .qa-item { border-bottom: 1px solid #e2e8f0; }
+        .qa-item:last-child { border-bottom: none; }
+        .qa-btn {
+            width: 100%; text-align: left; background: #f8fafc; border: none; padding: 16px;
+            font-size: 14px; font-weight: bold; color: #1a365d; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; outline: none; line-height: 1.4;
         }
-        .dl-btn.disabled:hover { opacity: 1; }
+        .qa-btn i { transition: transform 0.3s; color:#a0aec0; flex-shrink: 0; margin-left: 10px;}
+        .qa-btn.active i { transform: rotate(180deg); color:#1a365d;}
+        .qa-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #fff; }
+        .qa-inner { padding: 16px; font-size: 13px; color: #4a5568; line-height: 1.6; font-weight:bold; border-left: 3px solid #1a73e8; margin: 0 16px 16px 16px;}
+        .qa-inner span.a-mark { color: #1a73e8; font-weight: 900; margin-right: 4px; font-size: 15px;}
 
-        /* Q&A用の追加スタイル */
-        .qa-item { margin-bottom: 15px; }
-        .qa-item:last-child { margin-bottom: 0; }
-        .qa-q { font-weight: bold; color: #1a365d; font-size: 14px; margin-bottom: 5px; }
-        .qa-a { font-size: 13px; color: #4a5568; line-height: 1.6; padding-left: 10px; border-left: 3px solid #1a73e8; }
-        .qa-a span { font-weight: bold; color: #1a73e8; margin-right: 4px; }
+        /* 追従するキラキラLINEボタン */
+        .floating-line {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: #06C755; color: white; text-decoration: none;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 20px; border-radius: 30px; font-weight: bold; font-size: 14px;
+            box-shadow: 0 4px 15px rgba(6, 199, 85, 0.4);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* スクロールでフワッと表示 */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="banner">
+        <div class="banner fade-in">
             <img src="https://i.ibb.co/BHHq2nWy/2026-06-25-231125.png" alt="バナー">
         </div>
 
-        <div class="profile-section">
+        <div class="profile-section fade-in">
             <div class="profile-left">
                 <img src="https://i.ibb.co/tMk89NXj/f5f46631-ffde-4ac7-bdda-880fc5f369de-1.png" alt="プロフィールアイコン" class="profile-icon">
-                <div class="title">南大阪の人</div>
+                <div style="display:flex; flex-direction:column;">
+                    <div class="title">南大阪の人</div>
+                    <div class="counter-box">
+                        <div title="サイト訪問数" id="count-visit">---,---</div>
+                        <div title="総ダウンロード数" id="count-dl">---,---</div>
+                    </div>
+                </div>
             </div>
-            
             <div class="profile-right">
                 <div class="action-block">
                     <div class="btn-label line-color">LINE登録</div>
@@ -176,189 +193,339 @@
             </div>
         </div>
 
-        <div class="main-banner-wrapper">
-            <a href="#download-area">
+        <div class="main-banner-wrapper fade-in">
+            <a href="https://searchhubpro.github.io/searchhub-mobile-lite/" target="_blank" class="dl-btn-mobile">
                 <img src="https://i.ibb.co/qFmjqn0M/LINE.png" alt="各種ダウンロードはこちら">
             </a>
         </div>
 
-        <div class="pro-video-section">
-            <div class="pro-title">👑 SearchHub PRO版のご紹介</div>
-            <div class="video-wrapper" style="margin-bottom: 15px;">
-                <iframe src="https://www.youtube.com/embed/JeHf0p6jJ8E" title="SearchHub PRO版のご紹介" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <a href="https://searchhubpro.github.io/searchhub-store/" target="_blank" class="dl-btn pro">✨ アップグレードはこちら</a>
-        </div>
-
-        <div class="youtube-title">📺 YouTube動画一覧</div>
-
-        <div class="grid-section">
-            <a href="https://www.youtube.com/watch?v=JeHf0p6jJ8E&t=70s" target="_blank" class="grid-item">
-                <img src="https://i.ibb.co/mrWBV8JT/image.png" alt="YouTube動画">
-            </a>
-            <a href="https://youtu.be/UOP-Rsjh_kE" target="_blank" class="grid-item">
-                <img src="https://i.ibb.co/5xzxKN3N/image.png" alt="YouTube動画">
-            </a>
-            <div class="grid-item placeholder"></div>
-            <div class="grid-item placeholder"></div>
-            <div class="grid-item placeholder"></div>
-            <div class="grid-item placeholder"></div>
-        </div>
-
-        <div id="download-area" class="download-section">
-            
-            <div class="section-title">🎥 SearchHub Mobile Lite 紹介</div>
-
+        <div class="pro-video-section fade-in">
+            <div class="pro-title"><i class="fas fa-crown"></i> SearchHub PRO版</div>
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/UOP-Rsjh_kE" title="SearchHub Mobile Liteで出来ること" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/JeHf0p6jJ8E" title="SearchHub PRO版のご紹介" allowfullscreen></iframe>
             </div>
+            <a href="https://searchhubpro.github.io/searchhub-store/" target="_blank" class="btn-3d btn-pro"><i class="fas fa-rocket"></i> PRO版へのアップグレードはこちら</a>
+        </div>
 
-            <div style="font-size: 13px; color: #2c3e50; background-color: #ebf8ff; border: 1px solid #bee3f8; border-radius: 8px; padding: 15px; margin-bottom: 15px; line-height: 1.6; font-weight: bold;">
-                当システムは、スマホ用Webアプリとパソコン用スプレッドシートを組み合わせて使用するハイブリッド仕様です。ご利用の際は、以下をすべてダウンロードし、解説動画をご覧の上、設定を行ってください。<br>
-                <span style="color: #e52d27;">※Keepaの契約が別途必要です</span>
-            </div>
+        <div class="youtube-title fade-in"><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube動画一覧</div>
+        <div class="grid-section fade-in">
+            <a href="https://www.youtube.com/watch?v=JeHf0p6jJ8E&t=70s" target="_blank" class="grid-item"><img src="https://i.ibb.co/mrWBV8JT/image.png"></a>
+            <a href="https://youtu.be/UOP-Rsjh_kE" target="_blank" class="grid-item"><img src="https://i.ibb.co/5xzxKN3N/image.png"></a>
+            <div class="grid-item placeholder"></div>
+            <div class="grid-item placeholder"></div>
+            <div class="grid-item placeholder"></div>
+            <div class="grid-item placeholder"></div>
+        </div>
 
-            <div class="card" style="border: 2px solid #06C755; background-color: #f0fdf4; text-align: center; margin-bottom: 15px;">
-                <div style="font-size: 16px; font-weight: bold; color: #06C755; margin-bottom: 8px;">💚 LINE公式アカウント</div>
-                <div style="font-size: 13px; color: #333; margin-bottom: 15px; font-weight: bold; line-height: 1.5;">
-                    バージョンアップのお知らせや<br>お得な最新情報をお届けします！
+        <div class="sales-container">
+            
+            <h2 class="sales-heading fade-in">こんな悩みないですか？</h2>
+            
+            <div class="pain-list fade-in">
+                <div class="pain-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="pain-text">副業でせどりを始めたけど時間がかかりすぎて、毎日夜中まで作業をしていて疲れた</div>
                 </div>
-                <a href="https://lin.ee/yqLpbzZ" target="_blank" style="display: inline-block; background-color: #06C755; color: #fff; text-decoration: none; font-size: 14px; font-weight: bold; padding: 10px 30px; border-radius: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: opacity 0.2s;">
-                    友だち追加はこちら
-                </a>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📱 Mobile Lite (スマホ版)</div>
-                <div class="card-desc">外出先でのダッシュボード確認や仕入れ登録ができるスマホ専用画面です。ホーム画面に追加してご利用ください。</div>
-                <a href="https://searchhubpro.github.io/searchhub-mobile-lite/" target="_blank" class="dl-btn mobile">スマホに導入する</a>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🤖 拡張機能</div>
-                <div class="card-desc">ストアから、自動パトロール用の拡張機能をブラウザに追加してください。（※PC専用）</div>
-                <a href="https://chromewebstore.google.com/detail/searchhublite/nddmiedncgckcgigeoiagnpamfohoemf?authuser=0&hl=ja" target="_blank" class="dl-btn chrome">Chromeに追加する</a>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📊 専用シート（無料版）</div>
-                <div class="card-desc">ご自身のGoogleドライブにコピーして初期設定を行ってください。</div>
-                <a href="https://docs.google.com/spreadsheets/d/1EZWqQu6gfBKDwQJxpf5uZpN24oah7Zqm3eu0zKNpsec/copy" target="_blank" class="dl-btn sheet">シートをコピーする</a>
-            </div>
-
-            <div class="card">
-                <div class="card-title">💤 PCスリープタイマー</div>
-                <div class="card-desc">自動パトロール終了後に、PCを自動でスリープ状態にするための便利な補助ツールです。</div>
-                <a href="https://drive.google.com/file/d/14FYdbyWOqiuzltOU2rG7a05EQCBaVQy1/view?usp=sharing" target="_blank" class="dl-btn timer">ZIPをダウンロードする</a>
-            </div>
-
-            <div class="card">
-                <div class="card-title">📖 設定マニュアル</div>
-                
-                <div class="manual-item">
-                    <div class="manual-name">📱 Mobile Lite (スマホ版) 導入方法</div>
-                    <a href="https://youtu.be/8BhufCGXahU" target="_blank" class="dl-btn youtube">動画を見る</a>
+                <div class="pain-item">
+                    <i class="fas fa-search-minus"></i>
+                    <div class="pain-text">売れる商品が見つからなくて、仕入れが出来ないのに時間だけがかかる</div>
                 </div>
-                
-                <div class="manual-item">
-                    <div class="manual-name">🤖 拡張機能 導入方法</div>
-                    <a href="https://youtu.be/-T4sPx3IWo0" target="_blank" class="dl-btn youtube">動画を見る</a>
+                <div class="pain-item">
+                    <i class="fas fa-clone"></i>
+                    <div class="pain-text">仕入れするために複数サイトを全て確認するのは正直めんどくさいし、時間がかかりすぎる</div>
                 </div>
-                
-                <div class="manual-item">
-                    <div class="manual-name">📊 専用シート（無料版） 導入方法</div>
-                    <a href="https://youtu.be/j4pmPJoiazg" target="_blank" class="dl-btn youtube">動画を見る</a>
+                <div class="pain-item">
+                    <i class="fas fa-file-invoice"></i>
+                    <div class="pain-text">帳簿付けがめんどくさくて、溜まってしまってる</div>
                 </div>
-                
-                <div class="manual-item">
-                    <div class="manual-name">💤 PCスリープタイマー 導入方法</div>
-                    <a href="https://youtu.be/PP6Wz8RsMg8" target="_blank" class="dl-btn youtube">動画を見る</a>
+                <div class="pain-item">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <div class="pain-text">ツールの月額を払っているけど、固定費を抑えたい</div>
                 </div>
-                
-                <div class="manual-item">
-                    <div class="manual-name">📱 Mobile Lite機能説明</div>
-                    <a href="https://youtu.be/wmobhtqF5-M" target="_blank" class="dl-btn youtube">動画を見る</a>
-                    <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
-                      <div style="display: inline-flex; border: 1px solid #e2e8f0; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 11px; color: #cbd5e0; background: #f8fafc; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);">
-                        <div style="padding: 2px 6px; border-right: 1px solid #e2e8f0;" title="サイト訪問数" id="count-visit">---,---</div>
-                        <div style="padding: 2px 6px;" title="総ダウンロード数" id="count-dl">---,---</div>
-                      </div>
+            </div>
+
+            <div class="solution-box fade-in">
+                <div class="solution-title">そんな全ての悩みを解決します！</div>
+                <div class="solution-desc">
+                    PCが自動で売れる商品と仕入れ商品も探してくれます。<br>
+                    <span style="color:#e53e3e;">あなたの作業は確認と仕入れの決済だけ</span>
+                </div>
+            </div>
+
+            <h2 class="sales-subheading fade-in">あなたはいつまで、「商品」を探し続けますか？</h2>
+            <div class="sales-text fade-in">
+                物販で最も過酷な作業、それは「利益商品探し」です。<br>毎日数時間、画面をスクロールし、Keepaの波形を目で追い、ヤフオクの過去相場と睨めっこする……。
+            </div>
+            <div class="sales-text fade-in">
+                <span class="marker">もし、その「作業」をすべてシステムに丸投げし、あなたは「利益の確定」という果実を受け取るだけになるとしたら？</span>
+            </div>
+            <div class="sales-text fade-in">
+                プロの現場で磨き上げられた『SearchHub Pro』は、単なるツールではありません。「リサーチ → 利益判定 → 24時間監視 → 次のターゲット発掘」の全工程を自動で繋ぎ、ネタ切れすることなく無限に稼働し続ける<span style="font-weight:bold; color:#1a365d;">「半自動・物販工場」</span>をあなたのPCに構築します。<br><br>
+                裏ではGASが働き、ユーザーはウェブアプリを使用します。
+            </div>
+
+            <h2 class="sales-heading fade-in" style="margin-top:50px;">💎 SearchHub Proが実現する<br>「6つの革命」</h2>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">① Researcher</div>
+                <div class="feature-title">夜間自動メンテナンス × 無限セラー発掘ループ</div>
+                <div class="feature-desc">最大の売りは、設定した時間に勝手に動き出す夜間メンテナンスです。</div>
+                <ul class="feature-list">
+                    <li><span style="font-weight:bold; color:#2d3748;">完全自動実行:</span> あなたが寝ている間に、リストの価格更新、期限チェック、新規リサーチをすべて完了させます。</li>
+                    <li><span style="font-weight:bold; color:#2d3748;">セラー追跡の無限ループ:</span> お宝商品から「稼いでいるライバルセラー」を特定し、そのセラーの在庫からさらに新しいお宝を見つけ出す……<span class="marker">リサーチの連鎖が永遠に止まりません。</span></li>
+                </ul>
+                <img src="https://i.ibb.co/4wcV0p4Q/2026-06-16-152449.png" alt="Researcher画面1" class="feature-img" style="margin-bottom: 15px;">
+                <img src="https://i.ibb.co/dJcnHmW9/2026-06-15-212625.png" alt="Researcher画面2" class="feature-img">
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">② Watcher</div>
+                <div class="feature-title">10サイトを猟犬が走る「全自動パトロール」</div>
+                <div class="feature-desc">巡回を開始させるだけで、以下の出品状況を自動判定します。</div>
+                <div style="font-size:12px; font-weight:bold; color:#3182ce; background:#ebf8ff; padding:10px; border-radius:6px; margin-bottom:12px; line-height:1.5;">
+                    メルカリ・ヤフオク・ヤフーフリマ・オフモール・セカストオンライン・ラクマ・駿河屋・ヤフーショッピング・au PAY マーケット・トレファク
+                </div>
+                <ul class="feature-list">
+                    <li><span style="font-weight:bold; color:#2d3748;">出先でスマホ確認:</span> 朝に稼働させておけば、移動中などにスマホから最新の在庫状況をチェックし、そのまま仕入れが可能です。</li>
+                </ul>
+                <img src="https://i.ibb.co/35sGY3hH/2026-06-15-212711.png" alt="Watcher画面" class="feature-img">
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">③ Extension</div>
+                <div class="feature-title">6大サイトに対応した「全知全能・解析パネル」</div>
+                <div class="feature-desc">Amazonだけでなく、メルカリやヤフオクなど、パトロール対象のサイトに対応した最新のChrome拡張機能です。</div>
+                <ul class="feature-list">
+                    <li><span style="font-weight:bold; color:#2d3748;">一画面ですべてを把握:</span> 画面右下にパネルが出現。90日平均価格、中古最安値、ランク判定（SR〜E）、利益シミュレーター、Keepaグラフを一目で確認できます。</li>
+                    <li><span style="font-weight:bold; color:#2d3748;">ワンクリック他サイト検索:</span> パネル上のリンクから、5つの仕入れサイトの出品状況へ瞬時にジャンプできます。</li>
+                </ul>
+                <img src="https://i.ibb.co/RWP0BBL/2026-06-19-103437.png" alt="Extension画面1" class="feature-img" style="margin-bottom: 15px;">
+                <img src="https://i.ibb.co/1G3H8CTM/2026-06-19-103510.png" alt="Extension画面2" class="feature-img">
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">④ Manager</div>
+                <div class="feature-title">手入力を極限まで削ぎ落とした「管理の自動化」</div>
+                <div class="feature-desc">月額制の有料管理ツールと同等以上の機能を、買い切りで提供します。</div>
+                <ul class="feature-list">
+                    <li><span style="font-weight:bold; color:#2d3748;">レポート一括読み込み:</span> 販売データはAmazonのTXTやCSVを貼り付けるだけ。</li>
+                    <li><span style="font-weight:bold; color:#2d3748;">真の利益を可視化:</span> Amazonの手数料や「補填金」まで加味した、<span class="marker">正確な純利益を自動算出</span>します。</li>
+                </ul>
+                <img src="https://i.ibb.co/q3VGWJZn/2026-06-15-212914.png" alt="Manager画面1" class="feature-img" style="margin-bottom: 15px;">
+                <img src="https://i.ibb.co/PzrfNv19/2026-06-15-212846.png" alt="Manager画面2" class="feature-img" style="margin-bottom: 15px;">
+                <img src="https://i.ibb.co/4nHKJJ4t/2026-06-15-213105.png" alt="Manager画面3" class="feature-img" style="margin-bottom: 15px;">
+                <img src="https://i.ibb.co/934rSQTM/2026-06-15-213126.png" alt="Manager画面4" class="feature-img">
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">⑤ Sniper</div>
+                <div class="feature-title">早い者勝ちを制する「即時購入ログ」</div>
+                <div class="feature-desc">メルカリ、ヤフーフリマ、オフモールを常に監視し、新着をPC・モバイルに通知を送り、早い者勝ちを制します。</div>
+                <ul class="feature-list">
+                    <li>通知が来たら確認して仕入れるだけ。</li>
+                    <li><span class="marker">誰よりも早く仕入れが可能</span>になります。</li>
+                </ul>
+                <img src="https://i.ibb.co/chCz89t6/2026-06-15-212739.png" alt="Sniper画面" class="feature-img">
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-badge">⑥ Mobile</div>
+                <div class="feature-title">店舗でも電脳でも「隙なし」のリサーチ</div>
+                <div class="feature-desc">外出先でのダッシュボード確認や仕入れ登録ができるスマホ専用画面です。</div>
+                <ul class="feature-list">
+                    <li><span style="font-weight:bold; color:#2d3748;">現場での即時判断:</span> 店舗せどりの現場でもスマホで解析パネルを呼び出し、利益計算が可能です。</li>
+                    <li><span style="font-weight:bold; color:#2d3748;">即時記帳:</span> 仕入れた商品はその場でManager（シート）へ入力できるため、事務作業を溜め込みません。</li>
+                </ul>
+                <div class="mobile-grid">
+                    <img src="https://i.ibb.co/cXT014DV/IMG-0205.png" alt="Mobile画面1" class="feature-img-mobile">
+                    <img src="https://i.ibb.co/gZcW20Xn/IMG-0206.png" alt="Mobile画面2" class="feature-img-mobile">
+                    <img src="https://i.ibb.co/0pQ7cK1H/IMG-0207.png" alt="Mobile画面3" class="feature-img-mobile">
+                    <img src="https://i.ibb.co/kgFcHQmq/IMG-0208.png" alt="Mobile画面4" class="feature-img-mobile">
+                </div>
+            </div>
+
+            <h2 class="sales-subheading fade-in">🌙 「寝ている間」に軍師が働き、「起きている間」に猟犬が走る</h2>
+            <div class="check-list fade-in">
+                <div class="check-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div><span style="font-weight:bold; color:#1a365d;">【PC OFFでOK】サーバーサイド・リサーチ:</span> セラーからのASIN抽出や判定はGoogleのクラウド上で実行されます。あなたが寝ている間、システムは裏でお宝リストを完成させます。</div>
+                </div>
+                <div class="check-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div><span style="font-weight:bold; color:#1a365d;">【PC ONで稼働】全自動パトロール:</span> 「今、出品されたか」を監視するのは拡張機能の役割です。100件ごとに休憩を挟むなどの「人間らしい設計」でアカウントを守ります。</div>
+                </div>
+                <div class="check-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div><span style="font-weight:bold; color:#1a365d;">【作業終了】タスクスケジューラ―:</span> 仕事を終えたPCを安全にスリープさせます。</div>
+                </div>
+            </div>
+
+            <div class="warning-box fade-in">
+                <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> プロ仕様ゆえの必須条件</div>
+                <div class="warning-desc">
+                    本システムは、世界最高峰のデータを利用するプロの道具です。<br><br>
+                    <span style="color:#c53030;">Keepa 有料サブスクリプション（月額€49プラン以上推奨）への加入</span><br>
+                    APIをフル活用して「根こそぎ」データを抜くため、この経費は<strong>「デジタル社員の給料」</strong>だとお考えください。手動リサーチに費やす数百時間を考えれば、これほど安い投資はありません。
+                </div>
+            </div>
+
+            <h2 class="sales-subheading fade-in">最後に：ツールに使われるな、オーナーになれ。</h2>
+            <div class="sales-text fade-in">
+                『SearchHub Pro』は、あなたの代わりに「汗」をかくシステムです。<br>
+                要所での手動操作（条件設定や最終的な仕入れ判断）を残しているのは、<span class="marker">あなたのアカウントの安全を守り、目利き能力を失わせないため</span>です。
+            </div>
+            <div class="sales-text fade-in" style="font-weight:bold; color:#1a365d; text-align:center; font-size:16px;">
+                単純作業は機械に。利益の決断は人間に。<br>
+                この最強の布陣で、物販のステージを一段引き上げませんか？
+            </div>
+
+            <h2 class="sales-subheading fade-in" style="margin-top: 50px;">🙋‍♂️ よくあるご質問 (Q&A)</h2>
+            <div class="qa-container fade-in">
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q1：Keepaの有料プランは絶対に必要ですか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> はい、必須です。本システムはKeepaの「API」というプロ用機能を使って、数千件のデータを一瞬で解析します。月額費用（約8,000円〜）はかかりますが、外注を一人雇うより遥かに安く、手動リサーチの数百時間を数分に短縮できる投資だとお考えください。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q2：初心者でも設定できますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> 全工程を解説した「セットアップ動画」をご用意しています。実際の操作画面を見ながら、動画のマネをして進めていただく形になります。ただし、本ツールはプロ仕様のシステムです。PCの基本操作が全くできない方や、「最初の初期設定すら面倒くさい」と感じる方は導入をご遠慮ください。一度設定を乗り越えれば、あとはシステムがあなたの代わりに働き続けます。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q3：PCの電源を切っていてもリサーチしてくれますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> はい、リサーチ工程（セラー抽出や利益計算）はクラウドで動きます。Googleのサーバー上でシステムが動くため、寝ている間や外出中にPCの電源を落としていても、お宝リストは自動で完成します。ただし、見つかった商品が「今」出品されているかを確認するパトロール機能の実行時のみ、PCを起動しておく必要があります。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q4：完全自動で「仕入れ」までしてくれますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> いいえ、あえて「半自動（ハイブリッド）」にしています。面倒なリストアップはシステムが行いますが、最終的な仕入れ判断はご自身の目で行っていただきます。これにより、検品リスクや突発的な相場変動を回避し、高い利益率と安全性を両立させています。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q5：アカウント停止（BAN）のリスクはありませんか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> 「100%安全」なツールはこの世に存在しません。利用は完全自己責任となります。当システムは、10件巡回するごとに休憩を挟むなど「極限まで人間の操作に近づける」ことで、機械的なアクセスと判定されるリスクを最小限に抑え込む設計にしています。しかし「1%でもBANされるのが怖い」という方は、トラブル防止のため絶対に当ツールの導入はお控えいただき、手作業でのリサーチをお願いします。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q6：他の利用者と同じ商品を仕入れることになりませんか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> 飽和しにくい仕組みです。決まったリストを配るのではなく、あなたがターゲットにしたセラーからASINを抜き出すため、抽出されるリストは利用者ごとに全く異なります。自分だけの「独占ルート」を構築できるのが強みです。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q7：家電以外のカテゴリーでも使えますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> もちろんです。おもちゃ、ゲーム、楽器、カメラ、工具など、AmazonにカタログがありKeepaでデータが取れるカテゴリーであれば、あらゆるジャンルで威力を発揮します。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q8：スリープタイマーは何のためにあるのですか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> パトロール終了後にPCを休ませ、電気代を節約するためです。夜間にパトロール（監視）を走らせ、完了する頃に自動でスリープさせることで、朝起きた時に「仕入れ可能な商品」がシートに並んでいる状態を最小限のコストで作れます。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q9：スマートフォンでも使えますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> 設定とパトロールはPCが必要ですが、結果の確認はスマホで可能です。外出先からSearchHubMobileを開き商品をチェックして、そのままメルカリ等でポチるというスマートな仕入れが可能です。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q10：一度設定すれば、ずっとネタ切れしませんか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> はい、「永久ループ」機能がそれを可能にします。利益商品が見つかると、その商品を扱っている「他の実力派セラー」をシステムが自動で特定します。そこからまた新しいリサーチが始まるため、使えば使うほどリサーチ対象が雪だるま式に増えていきます。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q11：仕様が変わって使えなくなることはありますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> ウェブシステムの性質上、動作を永続的に保証することは致しかねます。各プラットフォームの大型アップデート等により一時的に動作が不安定になったり、機能が制限されたりする可能性がございます。そのような事態が発生した際は迅速な修正に全力を注ぎますが、対応が困難となるケースも稀に考えられます。その際は誠に恐縮ながら免責事項とさせていただきますので、あらかじめご了承の上ご検討ください。</div>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <button class="qa-btn">❓ Q12：どんなパソコンでも使用できますか？ <i class="fas fa-chevron-down"></i></button>
+                    <div class="qa-content">
+                        <div class="qa-inner"><span class="a-mark">A.</span> Windows、Mac共に動作確認済みです。但しSearchHub Sniperに関しましては起動した状態で放置になる為、熱対策が不十分な場合故障の原因になる場合が御座います。別途ミニPCをご準備されることをお勧めします。</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card" style="margin-top: 20px;">
-                <div class="section-title" style="font-size: 18px; margin-bottom: 15px; text-align: left;">🙋‍♂️ よくあるご質問 (Q&A)</div>
-                
-                <div class="qa-item">
-                    <div class="qa-q">❓ Q1. 本当に無料で使えるの？</div>
-                    <div class="qa-a"><span>A.</span>はい、無料版（Lite）は一切費用かかりません！初期設定さえすれば、ずっと無料でリサーチやパトロール機能をお試しいただけます。</div>
-                </div>
-                
-                <div class="qa-item">
-                    <div class="qa-q">❓ Q2. スマホだけで完結する？</div>
-                    <div class="qa-a"><span>A.</span>当システムは「スマホ用Webアプリ」と「パソコン用スプレッドシート」を連動させて使うハイブリッド仕様です。そのため、設定や自動パトロールにはパソコン（Googleアカウント）が必要です。外出先での確認や仕入れ登録はスマホから爆速で行えます！</div>
-                </div>
-                
-                <div class="qa-item">
-                    <div class="qa-q">❓ Q3. Keepaの契約は絶対に必要？</div>
-                    <div class="qa-a"><span>A.</span>はい、Amazonのデータを正確に解析・パトロールするため、有料版のKeepa契約（APIが使える状態）が別途必要になります。</div>
-                </div>
-                
-                <div class="qa-item">
-                    <div class="qa-q">❓ Q4. 無料版（Lite）とPRO版の違いは何？</div>
-                    <div class="qa-a"><span>A.</span>無料版は機能制限（仕入先やURLの登録ロック、一部画面のPRO版ロックなど）がありますが、WatcherパトロールやManagerへの仕入れ登録など基本機能はバッチリ使えます。PRO版にアップグレードすると、全ロックが解除されて売上・利益のリアルタイム自動集計なども完全解放されます！</div>
-                </div>
-                
-                <div class="qa-item">
-                    <div class="qa-q">❓ Q5. PCスリープタイマーって何に使うの？</div>
-                    <div class="qa-a"><span>A.</span>パソコンでの自動パトロールが終わった後に、自動でPCをスリープ状態にして電気代を節約するための便利な補助ツールです。夜間にパトロールを回しっぱなしにする時に大活躍します！</div>
+            <div class="warning-box fade-in" style="border-color: #e53e3e; background: #fff5f5; margin-bottom: 30px;">
+                <div class="warning-title" style="color: #c53030; font-size: 18px;"><i class="fas fa-exclamation-triangle"></i> ご購入前の最終確認（必ずお読みください）</div>
+                <div class="warning-desc" style="color: #742a2a;">
+                    当ツールは本気で利益と時間を最大化したい方のための「プロツール」です。<br>
+                    以下の条件にご納得いただけない方は、<span style="font-weight:900; color:#e53e3e; border-bottom:2px solid #e53e3e;">絶対に購入しないでください。</span><br><br>
+                    <ul style="padding-left: 20px; margin: 0; line-height: 1.8;">
+                        <li>PC（WindowsまたはMac）とGoogle Chromeがない方</li>
+                        <li>Keepa有料版（月額€49〜）の経費が払えない方</li>
+                        <li>最初の初期設定動画を見る時間すら惜しい方</li>
+                        <li>ツール利用に伴うアカウントリスクを自己責任として許容できない方</li>
+                    </ul>
                 </div>
             </div>
-            
+
+            <a href="https://searchhubpro.github.io/searchhub-store/" target="_blank" class="btn-3d btn-pro fade-in" style="margin-top:30px;"><i class="fas fa-rocket"></i> PRO版へのアップグレードはこちら</a>
+
         </div>
 
+        <a href="https://lin.ee/yqLpbzZ" target="_blank" class="floating-line">
+            <i class="fab fa-line" style="font-size:20px;"></i> LINE登録
+        </a>
     </div>
 
     <script>
+        // フワッと表示
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        
+        setTimeout(() => { document.querySelectorAll('.fade-in').forEach((el, index) => { if(index < 3) el.classList.add('visible'); }); }, 100);
+
+        // 🔽 アコーディオン（Q&A開閉）機能
+        document.querySelectorAll('.qa-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // 📊 カウンター取得用処理
         const COUNTER_GAS_URL = "https://script.google.com/macros/s/AKfycbzqAlLUYIiBL3xCmB6iBArALrLxnP6yvtrEHEdpA5L0Up-6pNxKDIE-ZkXf5Mo4sktkdA/exec";
 
         window.addEventListener('DOMContentLoaded', () => {
             if(COUNTER_GAS_URL.includes("【")) return;
-            
             fetch(COUNTER_GAS_URL + "?action=visit")
-                .then(response => response.json())
-                .then(data => updateCounterUI(data.visits, data.downloads))
+                .then(r => r.json())
+                .then(d => updateCounterUI(d.visits, d.downloads))
                 .catch(e => console.log("Counter Error", e));
         });
 
         function recordDownload() {
             if(COUNTER_GAS_URL.includes("【")) return;
-            
             fetch(COUNTER_GAS_URL + "?action=download")
-                .then(response => response.json())
-                .then(data => updateCounterUI(data.visits, data.downloads))
+                .then(r => r.json())
+                .then(d => updateCounterUI(d.visits, d.downloads))
                 .catch(e => console.log("Counter Error", e));
         }
 
         function updateCounterUI(v, d) {
-            if(document.getElementById('count-visit')) {
-                document.getElementById('count-visit').innerText = String(v).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-            if(document.getElementById('count-dl')) {
-                document.getElementById('count-dl').innerText = String(d).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
+            if(document.getElementById('count-visit')) document.getElementById('count-visit').innerText = String(v).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            if(document.getElementById('count-dl')) document.getElementById('count-dl').innerText = String(d).padStart(6, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // ③ 「Mobile Lite（スマホ版）」のボタンが押された時だけカウントする
-        window.addEventListener('DOMContentLoaded', () => {
-            const mobileBtn = document.querySelector('.dl-btn.mobile');
-            if(mobileBtn) {
-                mobileBtn.addEventListener('click', () => {
-                    recordDownload();
-                });
-            }
-        });
+        // バナー画像をクリックした時にダウンロード数をカウント
+        document.querySelector('.dl-btn-mobile')?.addEventListener('click', () => { recordDownload(); });
     </script>
 </body>
 </html>
