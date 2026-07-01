@@ -21,47 +21,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden;
             position: relative;
         }
-        .banner img { width: 100%; height: auto; display: block; }
-        
-        .profile-section { padding: 20px 15px; display: flex; align-items: center; justify-content: space-between; }
-        .profile-left { display: flex; align-items: center; gap: 12px; }
-        .profile-icon {
-            width: 60px; height: 60px; border-radius: 50%;
-            object-fit: cover; border: 2px solid #eee; flex-shrink: 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .title { font-size: 16px; font-weight: 900; color: #1a365d; }
-        
-        /* カウンター用 */
-        .counter-box { display: inline-flex; border: 1px solid #e2e8f0; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 10px; color: #a0aec0; background: #f8fafc; margin-top:4px;}
-        .counter-box div { padding: 2px 6px; }
-        .counter-box div:first-child { border-right: 1px solid #e2e8f0; }
-
-        /* 💡 修正：右側のボタンエリアの隙間を少し詰めて安全圏を確保 */
-        .profile-right { display: flex; flex-direction: row; align-items: center; gap: 6px; }
-        .action-block { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        
-        /* 💡 修正：文字が絶対に2行に改行されないようにする */
-        .btn-label { font-size: 11px; font-weight: bold; color: #e52d27; white-space: nowrap; }
-        .btn-label.line-color { color: #06C755; }
-        .line-btn {
-            background-color: #06C755; color: #fff; text-decoration: none;
-            font-size: 11px; font-weight: bold; padding: 0 8px; border-radius: 2px;
-            display: flex; align-items: center; justify-content: center;
-            height: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: opacity 0.2s;
-            white-space: nowrap; /* ← 絶対に2行にならない魔法 */
-            min-width: 65px; /* ← ボタンの最低限の幅をキープ */
-        }
-        .line-btn:hover { opacity: 0.8; }
-        
-        /* メインバナー */
-        .main-banner-wrapper { padding: 0 15px 20px; }
-        .main-banner-wrapper a { display: block; text-decoration: none; transition: transform 0.2s; }
-        .main-banner-wrapper a:hover { transform: scale(1.02); }
-        .main-banner-wrapper img {
-            width: 100%; height: auto; display: block;
-            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-        }
+        .banner img { width: 100%; height: auto; display: block; margin-bottom: 20px; }
         
         /* PROセクション */
         .pro-video-section { padding: 0 15px 30px; }
@@ -166,35 +126,6 @@
     <div class="container">
         <div class="banner fade-in">
             <img src="https://i.ibb.co/BHHq2nWy/2026-06-25-231125.png" alt="バナー">
-        </div>
-
-        <div class="profile-section fade-in">
-            <div class="profile-left">
-                <img src="https://i.ibb.co/tMk89NXj/f5f46631-ffde-4ac7-bdda-880fc5f369de-1.png" alt="プロフィールアイコン" class="profile-icon">
-                <div style="display:flex; flex-direction:column;">
-                    <div class="title">南大阪の人</div>
-                    <div class="counter-box">
-                        <div title="サイト訪問数" id="count-visit">---,---</div>
-                        <div title="総ダウンロード数" id="count-dl">---,---</div>
-                    </div>
-                </div>
-            </div>
-            <div class="profile-right">
-                <div class="action-block">
-                    <div class="btn-label line-color">LINE登録</div>
-                    <a href="https://lin.ee/yqLpbzZ" target="_blank" class="line-btn">友だち追加</a>
-                </div>
-                <div class="action-block">
-                    <div class="btn-label">チャンネル登録</div>
-                    <div class="g-ytsubscribe" data-channelid="UCPP573RowjweYef2-V8x9UQ" data-layout="default" data-count="default"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-banner-wrapper fade-in">
-            <a href="https://searchhubpro.github.io/searchhub-mobile-lite/" target="_blank" class="dl-btn-mobile">
-                <img src="https://i.ibb.co/qFmjqn0M/LINE.png" alt="各種ダウンロードはこちら">
-            </a>
         </div>
 
         <div class="pro-video-section fade-in">
@@ -442,13 +373,13 @@
                 <div class="qa-item">
                     <button class="qa-btn">❓ Q11：各サイト（メルカリやヤフオク等）の仕様が変わって使えなくなることはありますか？ <i class="fas fa-chevron-down"></i></button>
                     <div class="qa-content">
-                        <div class="qa-inner">ウェブシステムの性質上、動作を永続的に保証することは致しかねます。大型アップデート等により一時的に機能制限がかかる可能性はございます。開発者として迅速な修正に全力を注ぎますが、技術的に対応困難な場合は免責とさせていただきます。常に最新の状態で稼げる環境を維持できるよう、日々改善を継続することをお約束いたします。</div>
+                        <div class="qa-inner"><span class="a-mark">A.</span> ウェブシステムの性質上、動作を永続的に保証することは致しかねます。大型アップデート等により一時的に機能制限がかかる可能性はございます。開発者として迅速な修正に全力を注ぎますが、技術的に対応困難な場合は免責とさせていただきます。常に最新の状態で稼げる環境を維持できるよう、日々改善を継続することをお約束いたします。</div>
                     </div>
                 </div>
                 <div class="qa-item">
                     <button class="qa-btn">❓ Q12：どんなパソコンでも使用できますか？ <i class="fas fa-chevron-down"></i></button>
                     <div class="qa-content">
-                        <div class="qa-inner">Windows、Mac共に動作確認済みです。但しSearchHub Sniperに関しましては起動した状態で放置になる為、熱対策が不十分な場合故障の原因になる場合が御座います。別途ミニPCをご準備されることをお勧めします。</div>
+                        <div class="qa-inner"><span class="a-mark">A.</span> Windows、Mac共に動作確認済みです。但しSearchHub Sniperに関しましては起動した状態で放置になる為、熱対策が不十分な場合故障の原因になる場合が御座います。別途ミニPCをご準備されることをお勧めします。</div>
                     </div>
                 </div>
             </div>
@@ -495,34 +426,6 @@
                 }
             });
         });
-
-        // 📊 カウンター取得用処理
-        const COUNTER_GAS_URL = "https://script.google.com/macros/s/AKfycbzqAlLUYIiBL3xCmB6iBArALrLxnP6yvtrEHEdpA5L0Up-6pNxKDIE-ZkXf5Mo4sktkdA/exec";
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if(COUNTER_GAS_URL.includes("【")) return;
-            fetch(COUNTER_GAS_URL + "?action=visit")
-                .then(r => r.json())
-                .then(d => updateCounterUI(d.visits, d.downloads))
-                .catch(e => console.log("Counter Error", e));
-        });
-
-        function recordDownload() {
-            if(COUNTER_GAS_URL.includes("【")) return;
-            fetch(COUNTER_GAS_URL + "?action=download")
-                .then(r => r.json())
-                .then(d => updateCounterUI(d.visits, d.downloads))
-                .catch(e => console.log("Counter Error", e));
-        }
-
-        // 💡 修正：padStartを「5」に変更して頭の0を1つ削減！これで横幅をスリム化！
-        function updateCounterUI(v, d) {
-            if(document.getElementById('count-visit')) document.getElementById('count-visit').innerText = String(v).padStart(5, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            if(document.getElementById('count-dl')) document.getElementById('count-dl').innerText = String(d).padStart(5, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        // バナー画像をクリックした時にダウンロード数をカウント
-        document.querySelector('.dl-btn-mobile')?.addEventListener('click', () => { recordDownload(); });
     </script>
 </body>
 </html>
